@@ -1,0 +1,18 @@
+/HLT2jetGapFilter.cc/1.2/Sat Jun  7 19:46:08 2008//TV00-01-12
+/HLTAcoFilter.cc/1.5/Sat Oct 11 13:13:59 2008//TV00-01-12
+/HLTDiJetAveFilter.cc/1.7/Wed Feb 16 17:30:07 2011//TV00-01-12
+/HLTExclDiJetFilter.cc/1.3/Wed Feb 16 17:30:07 2011//TV00-01-12
+/HLTForwardBackwardJetsFilter.cc/1.3/Wed Feb 16 17:30:07 2011//TV00-01-12
+/HLTHPDFilter.cc/1.5/Fri Feb 11 20:55:24 2011//TV00-01-12
+/HLTHcalMETNoiseFilter.cc/1.15/Tue Apr 12 21:47:29 2011//TV00-01-12
+/HLTJetIDProducer.cc/1.4/Tue Feb  8 16:46:43 2011//TV00-01-12
+/HLTJetL1MatchProducer.cc/1.1/Fri Jan 14 20:42:48 2011//TV00-01-12
+/HLTJetVBFFilter.cc/1.7/Fri Feb 25 12:45:40 2011//TV00-01-12
+/HLTMhtHtFilter.cc/1.10/Fri Mar 18 15:06:29 2011//TV00-01-12
+/HLTNVFilter.cc/1.6/Sat Oct 11 13:13:59 2008//TV00-01-12
+/HLTPhi2METFilter.cc/1.6/Sat Oct 11 13:13:59 2008//TV00-01-12
+/HLTRFilter.cc/1.5/Thu Apr 21 14:05:37 2011//TV00-01-12
+/HLTRHemisphere.cc/1.3/Thu Apr 21 14:05:36 2011//TV00-01-12
+/HLTRapGapFilter.cc/1.7/Sat Jun  7 19:46:08 2008//TV00-01-12
+/SealModule.cc/1.16/Fri Jan 14 20:43:18 2011//TV00-01-12
+D
