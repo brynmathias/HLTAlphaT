@@ -129,13 +129,14 @@ bool
   if(recocalojets->size() > 0){
     // events with at least one jet
     //make a collection of jets to push back in to alphaT
+    std::cout << " Starting event " << std::endl;
     std::vector<LorentzV> jets;
     for (CaloJetCollection::const_iterator recocalojet = recocalojets->begin();
     recocalojet != recocalojets->end(); recocalojet++) {
       if (flag == 1){break;}
       jetVar = recocalojet->pt();
       if (!usePt_ || mode_==3 ) jetVar = recocalojet->et();
-
+      if( jetVar < minPtJet_.at(0) ) { break ;}
       if (mode_==1 || mode_==2 || mode_ == 5) {//---get MHT
         if (jetVar > minPtJet_.at(1) && fabs(recocalojet->eta()) < etaJet_.at(1)) {
           mhtx -= jetVar*cos(recocalojet->phi());
@@ -161,8 +162,9 @@ bool
       }
       if(mode_ == 5){
         double mHT = sqrt( (mhtx*mhtx) + (mhty*mhty) );
+        if (jetVar > minPtJet_.at(0) && fabs(recocalojet->eta()) < etaJet_.at(0)) {
         dht += ( nj < 2 ? jetVar : -1.* jetVar ); //@@ only use for njets < 4
-
+        }
         double alphaT = AlphaT()( jets );
         if ( nj == 2 || nj == 3 ) {
           aT = ( ht - fabs(dht) ) / ( 2. * sqrt( ( ht*ht ) - ( mHT*mHT  ) ) );
