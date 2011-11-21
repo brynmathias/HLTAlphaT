@@ -31,7 +31,7 @@
 #include "TLorentzVector.h"
 
 
-typedef ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> > LorentzV  ;
+typedef ROOT::Math::LorentzVector<ROOT::Math::PtEtaPhiM4D<double> > LorentzV  ;
 
 //
 // constructors and destructor
@@ -146,8 +146,8 @@ bool
         if (jetVar > minPtJet_.at(0) && fabs(recocalojet->eta()) < etaJet_.at(0)) {
           ht += jetVar;
           nj++;
-          LorentzV JetLVec(0.,0.,0.,0.);
-          JetLVec.SetPtEtaPhiM(recocalojet->pt(),recocalojet->eta(),recocalojet->phi(),recocalojet->mass());
+          LorentzV JetLVec(recocalojet->pt(),recocalojet->eta(),recocalojet->phi(),recocalojet->mass());
+          // JetLVec.SetPtEtaPhiM
           jets.push_back( JetLVec );
         }
       }
