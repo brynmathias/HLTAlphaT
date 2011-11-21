@@ -53,7 +53,7 @@ struct AlphaT {
   // -----------------------------------------------------------------------------
   //
   template<class TLorentzVector>
-  double operator()( const std::vector<TLorentzVector const *>& p4,
+  double operator()( const std::vector<TLorentzVector *>& p4,
   bool use_et = true ) const {
 
     if ( p4.size() == 0 ) { return 0; }
