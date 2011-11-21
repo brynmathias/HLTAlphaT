@@ -161,7 +161,8 @@ bool
         std::vector<double> px;
         std::vector<double> py;
 
-        transform( jets.begin(), jets.end(), back_inserter(et), std::mem_fun_ref( use_et ? &TLorentzVector::Et : &TLorentzVector::Pt ) );
+        double alphaT = 0.;
+        transform( jets.begin(), jets.end(), back_inserter(et), std::mem_fun_ref(&TLorentzVector::Et) );
         transform( jets.begin(), jets.end(), back_inserter(px), std::mem_fun_ref(&TLorentzVector::Px) );
         transform( jets.begin(), jets.end(), back_inserter(py), std::mem_fun_ref(&TLorentzVector::Py) );
 
@@ -186,7 +187,7 @@ bool
     if ( min_delta_sum_et < 0. ) { alphaT =  0.; }
 
     // Alpha_T
-    double  alphaT =  ( 0.5 * ( sum_et - min_delta_sum_et ) / sqrt( sum_et*sum_et - (sum_px*sum_px+sum_py*sum_py) ) );
+     alphaT =  ( 0.5 * ( sum_et - min_delta_sum_et ) / sqrt( sum_et*sum_et - (sum_px*sum_px+sum_py*sum_py) ) );
 
 
         if ( nj == 2 || nj == 3 ) {
