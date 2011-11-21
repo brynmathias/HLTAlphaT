@@ -140,9 +140,9 @@ bool
         if (jetVar > minPtJet_.at(0) && fabs(recocalojet->eta()) < etaJet_.at(0)) {
           ht += jetVar;
           nj++;
-          TLorentzVector JetLVec(0.,0.,0.,0.);
+          TLorentzVector *JetLVec(0.,0.,0.,0.);
           JetLVec.SetPtEtaPhiM(recocalojet->pt(),recocalojet->eta(),recocalojet->phi(),recocalojet->mass());
-          jets.push_back( &JetLVec );
+          jets.push_back( JetLVec );
         }
       }
       if (mode_==3) {//---get PT12
