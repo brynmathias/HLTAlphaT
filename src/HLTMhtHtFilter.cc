@@ -26,7 +26,7 @@
 #include "FWCore/Utilities/interface/InputTag.h"
 #include <vector>
 #include <algorithm>
-
+#include <functional>
 #include "TLorentzVector.h"
 
 //
