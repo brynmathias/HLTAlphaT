@@ -52,7 +52,6 @@ struct AlphaT {
 
   // -----------------------------------------------------------------------------
   //
-  template<class TLorentzVector>
   double operator()( const std::vector<TLorentzVector const *>& p4,
   bool use_et = true ) const {
 
@@ -72,7 +71,6 @@ struct AlphaT {
 
   // -----------------------------------------------------------------------------
   //
-  template<class TLorentzVector>
   double operator()( const std::vector<TLorentzVector const *>& p4,
     std::vector<bool>& pseudo_jet1,
   bool use_et = true ) const {
@@ -94,7 +92,6 @@ struct AlphaT {
 
   // -----------------------------------------------------------------------------
   //
-  template<class TLorentzVector>
   double operator()( const std::vector<TLorentzVector>& p4,
   bool use_et = true ) const {
 
@@ -115,7 +112,6 @@ struct AlphaT {
 
   // -----------------------------------------------------------------------------
   //
-  template<class TLorentzVector>
   double operator()( const std::vector<TLorentzVector>& p4,
     std::vector<bool>& pseudo_jet1,
   bool use_et = true ) const {
