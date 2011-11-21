@@ -163,7 +163,7 @@ bool
         double mHT = sqrt( (mhtx*mhtx) + (mhty*mhty) );
         dht += ( nj < 2 ? jetVar : -1.* jetVar ); //@@ only use for njets < 4
 
-        alphaT = AlphaT()( jets );
+        double alphaT = AlphaT()( jets );
         if ( nj == 2 || nj == 3 ) {
           aT = ( ht - fabs(dht) ) / ( 2. * sqrt( ( ht*ht ) - ( mHT*mHT  ) ) );
         } else if ( nj > 3 ) {
