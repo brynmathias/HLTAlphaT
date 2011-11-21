@@ -6,6 +6,7 @@
 */
 
 #include "HLTrigger/JetMET/interface/HLTMhtHtFilter.h"
+#include "HLTrigger/JetMET/interface/AlphaT.hh"
 
 #include "DataFormats/Common/interface/Handle.h"
 
@@ -24,7 +25,7 @@
 #include "FWCore/ParameterSet/interface/ParameterSetDescription.h"
 #include "FWCore/Utilities/interface/InputTag.h"
 #include <vector>
-
+#include "TLorentzVector.h"
 
 //
 // constructors and destructor
@@ -121,6 +122,8 @@ bool
   double aT = 0.;
   if(recocalojets->size() > 0){
     // events with at least one jet
+    //make a collection of jets to push back in to alphaT
+    std::vector<CaloJetCollection> jets;
     for (CaloJetCollection::const_iterator recocalojet = recocalojets->begin();
     recocalojet != recocalojets->end(); recocalojet++) {
       if (flag == 1){break;}
@@ -137,6 +140,7 @@ bool
         if (jetVar > minPtJet_.at(0) && fabs(recocalojet->eta()) < etaJet_.at(0)) {
           ht += jetVar;
           nj++;
+          jets.push_back( *recocalojet );
         }
       }
       if (mode_==3) {//---get PT12
@@ -150,11 +154,13 @@ bool
       if(mode_ == 5){
         double mHT = sqrt( (mhtx*mhtx) + (mhty*mhty) );
         dht += ( nj < 2 ? jetVar : -1.* jetVar ); //@@ only use for njets < 4
+        double alpha_t = AlphaT()( jets );
         if ( nj == 2 || nj == 3 ) {
           aT = ( ht - fabs(dht) ) / ( 2. * sqrt( ( ht*ht ) - ( mHT*mHT  ) ) );
         } else if ( nj > 3 ) {
           aT = ht / ( 2.*sqrt( ( ht*ht ) - ( mHT*mHT  ) ) );
         }
+        std::cout << "AlphaT from full calculation = " << alpha_t << " ALphaT from approximation = " << aT << std::endl;
         if(ht > minHt_ && aT > minAlphaT_){
   // put filter object into the Event
           flag = 1;
