@@ -3,14 +3,68 @@
 import FWCore.ParameterSet.Config as cms
 
 process = cms.Process( "asdf" )
-
+process.load("setup_cff")
 process.HLTConfigVersion = cms.PSet(
   tableName = cms.string('/users/bm309/AlphaTFullCalc/V1')
 )
 
 process.source = cms.Source( "PoolSource",
-    fileNames = cms.untracked.vstring( '/store/data/Run2011A/MinimumBias/RAW/v1/000/161/312/FEE65985-EF55-E011-A137-001617E30F50.root' )
-)
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/FAC9A642-DF54-E011-B4A0-001D09F24353.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/E88B444C-D854-E011-B009-003048F117EA.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/5E8FFAD5-DD54-E011-A93A-001D09F2A690.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/30CDDA99-CF54-E011-9C12-003048F118D2.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/6E384835-E654-E011-8038-003048678098.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/FA16A95D-E854-E011-88E0-0030487CD6F2.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/3EBD7D6F-EA54-E011-AD1E-0030487CD14E.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/4461392B-DD54-E011-ABA2-0030486780B8.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/748E758B-CF54-E011-938E-003048F117EC.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/E4F09BE9-E654-E011-8F8A-003048F118D2.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/6A254EBF-D654-E011-BA99-001617E30D4A.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/0C19714C-E154-E011-B78B-00304879BAB2.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/A2CB4262-E854-E011-AC1D-003048D2BDD8.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/CC4387BF-D654-E011-93F5-003048678098.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/7E3FA7D4-E454-E011-98D5-003048F11DE2.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/DA580914-CE54-E011-AFB9-003048F024FE.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/3E33D245-F454-E011-9A0D-001D09F25393.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/FE2E8847-F454-E011-982F-001D09F28F0C.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/2611AB28-F554-E011-B303-001D09F253C0.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/E00D6054-EF54-E011-BEEB-001617E30CC2.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/C2CDA34F-E154-E011-B1C6-0030487CD7EE.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/C6771A87-F354-E011-99AA-003048F01E88.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/D4C7ADD6-E454-E011-BF3D-001617E30E28.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/1AC76449-DA54-E011-AD11-0030487C778E.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/4C45E1C0-D654-E011-A37F-001D09F24489.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/74698047-D854-E011-89A7-001D09F241B9.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/F03B0781-F654-E011-8B9A-001D09F28EC1.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/DA590092-CB54-E011-9A72-003048F1182E.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/8C32490D-D754-E011-9D81-001D09F2B2CF.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/F0E65544-DF54-E011-9A40-001D09F2A690.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/6E73243B-D354-E011-A8C2-001617E30D0A.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/309EED9B-D054-E011-AB0B-0030487CD184.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/7A4F9A6E-F154-E011-BCA6-001617E30F50.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/448E1EAC-DB54-E011-B680-001617E30D52.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/E0AE6B8D-D754-E011-9E4C-001617E30D40.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/507A6892-E554-E011-9A8C-000423D98950.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/CE789FA8-EE54-E011-BDD4-003048F118D2.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/6279FCF5-E154-E011-83D9-001617C3B706.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/C8F6D7FD-F254-E011-86A6-001617E30CC2.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/C09D582B-DD54-E011-A112-0030486733B4.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/A250339F-E554-E011-9E34-003048F024F6.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/E2A0DB14-CE54-E011-BAE6-001D09F295FB.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/040C21D2-CF54-E011-9E74-001D09F29114.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/0A65DCDD-D154-E011-A227-001D09F23D1D.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/90D71945-EE54-E011-9528-001D09F24259.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/2C6C537A-EA54-E011-864D-003048D3756A.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/C86C6045-DA54-E011-9218-0030487C90EE.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/568A518C-EC54-E011-AECD-003048F1C832.root
+# /store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/5A625A0A-E954-E011-A26F-003048F11C58.root
+
+
+
+
+
+
+    fileNames = cms.untracked.vstring( '/store/data/Run2011A/MinimumBias/RAW/v1/000/161/217/FAC9A642-DF54-E011-B4A0-001D09F24353.root' ))
 
 process.hltTriggerType = cms.EDFilter( "HLTTriggerTypeFilter",
     SelectedTriggerType = cms.int32( 1 )
@@ -103,11 +157,11 @@ process.hltEcalRegionalRestFEDs = cms.EDProducer( "EcalRawToRecHitRoI",
     doES = cms.bool( False ),
     sourceTag_es = cms.InputTag( "NotNeededoESfalse" ),
     MuJobPSet = cms.PSet(  ),
-    JetJobPSet = cms.VPSet( 
+    JetJobPSet = cms.VPSet(
     ),
-    EmJobPSet = cms.VPSet( 
+    EmJobPSet = cms.VPSet(
     ),
-    CandJobPSet = cms.VPSet( 
+    CandJobPSet = cms.VPSet(
     )
 )
 process.hltEcalRecHitAll = cms.EDProducer( "EcalRawToRecHitProducer",
@@ -117,7 +171,7 @@ process.hltEcalRecHitAll = cms.EDProducer( "EcalRawToRecHitProducer",
     EBrechitCollection = cms.string( "EcalRecHitsEB" ),
     EErechitCollection = cms.string( "EcalRecHitsEE" ),
     rechitCollection = cms.string( "NotNeededsplitOutputTrue" ),
-    cleaningConfig = cms.PSet( 
+    cleaningConfig = cms.PSet(
       tightenCrack_e1_double = cms.double( 2.0 ),
       tightenCrack_e6e2_double = cms.double( 3.0 ),
       e4e1Threshold_endcap = cms.double( 0.3 ),
@@ -167,7 +221,7 @@ process.hltHbhereco = cms.EDProducer( "HcalHitReconstructor",
     setTimingShapedCutsFlags = cms.bool( False ),
     digistat = cms.PSet(  ),
     HFInWindowStat = cms.PSet(  ),
-    S9S1stat = cms.PSet( 
+    S9S1stat = cms.PSet(
       longETParams = cms.vdouble( 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ),
       shortEnergyParams = cms.vdouble( 35.1773, 35.37, 35.7933, 36.4472, 37.3317, 38.4468, 39.7925, 41.3688, 43.1757, 45.2132, 47.4813, 49.98, 52.7093 ),
       flagsToSkip = cms.int32( 24 ),
@@ -178,7 +232,7 @@ process.hltHbhereco = cms.EDProducer( "HcalHitReconstructor",
       isS8S1 = cms.bool( False ),
       HcalAcceptSeverityLevel = cms.int32( 9 )
     ),
-    S8S1stat = cms.PSet( 
+    S8S1stat = cms.PSet(
       longETParams = cms.vdouble( 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ),
       shortEnergyParams = cms.vdouble( 40.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0 ),
       flagsToSkip = cms.int32( 16 ),
@@ -189,7 +243,7 @@ process.hltHbhereco = cms.EDProducer( "HcalHitReconstructor",
       isS8S1 = cms.bool( True ),
       HcalAcceptSeverityLevel = cms.int32( 9 )
     ),
-    PETstat = cms.PSet( 
+    PETstat = cms.PSet(
       longETParams = cms.vdouble( 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ),
       short_R_29 = cms.vdouble( 0.8 ),
       shortEnergyParams = cms.vdouble( 35.1773, 35.37, 35.7933, 36.4472, 37.3317, 38.4468, 39.7925, 41.3688, 43.1757, 45.2132, 47.4813, 49.98, 52.7093 ),
@@ -202,25 +256,25 @@ process.hltHbhereco = cms.EDProducer( "HcalHitReconstructor",
       HcalAcceptSeverityLevel = cms.int32( 9 )
     ),
     saturationParameters = cms.PSet(  maxADCvalue = cms.int32( 127 ) ),
-    timingshapedcutsParameters = cms.PSet( 
+    timingshapedcutsParameters = cms.PSet(
       ignorelowest = cms.bool( True ),
       win_offset = cms.double( 0.0 ),
       ignorehighest = cms.bool( False ),
       win_gain = cms.double( 1.0 ),
       tfilterEnvelope = cms.vdouble( 4.0, 12.04, 13.0, 10.56, 23.5, 8.82, 37.0, 7.38, 56.0, 6.3, 81.0, 5.64, 114.5, 5.44, 175.5, 5.38, 350.5, 5.14 )
     ),
-    flagParameters = cms.PSet( 
+    flagParameters = cms.PSet(
       nominalPedestal = cms.double( 3.0 ),
       hitMultiplicityThreshold = cms.int32( 17 ),
       hitEnergyMinimum = cms.double( 1.0 ),
-      pulseShapeParameterSets = cms.VPSet( 
+      pulseShapeParameterSets = cms.VPSet(
         cms.PSet(  pulseShapeParameters = cms.vdouble( 0.0, 100.0, -50.0, 0.0, -15.0, 0.15 )        ),
         cms.PSet(  pulseShapeParameters = cms.vdouble( 100.0, 2000.0, -50.0, 0.0, -5.0, 0.05 )        ),
         cms.PSet(  pulseShapeParameters = cms.vdouble( 2000.0, 1000000.0, -50.0, 0.0, 95.0, 0.0 )        ),
         cms.PSet(  pulseShapeParameters = cms.vdouble( -1000000.0, 1000000.0, 45.0, 0.1, 1000000.0, 0.0 )        )
       )
     ),
-    hscpParameters = cms.PSet( 
+    hscpParameters = cms.PSet(
       slopeMax = cms.double( -0.6 ),
       r1Max = cms.double( 1.0 ),
       r1Min = cms.double( 0.15 ),
@@ -234,7 +288,7 @@ process.hltHbhereco = cms.EDProducer( "HcalHitReconstructor",
       fracLeaderMax = cms.double( 0.7 )
     ),
     pulseShapeParameters = cms.PSet(  ),
-    hfTimingTrustParameters = cms.PSet( 
+    hfTimingTrustParameters = cms.PSet(
       hfTimingTrustLevel2 = cms.int32( 4 ),
       hfTimingTrustLevel1 = cms.int32( 1 )
     ),
@@ -259,7 +313,7 @@ process.hltHfreco = cms.EDProducer( "HcalHitReconstructor",
     useLeakCorrection = cms.bool( False ),
     Subdetector = cms.string( "HF" ),
     setTimingShapedCutsFlags = cms.bool( False ),
-    digistat = cms.PSet( 
+    digistat = cms.PSet(
       HFdigiflagFirstSample = cms.int32( 1 ),
       HFdigiflagMinEthreshold = cms.double( 40.0 ),
       HFdigiflagSamplesToAdd = cms.int32( 3 ),
@@ -268,7 +322,7 @@ process.hltHfreco = cms.EDProducer( "HcalHitReconstructor",
       HFdigiflagCoef1 = cms.double( -0.38275 ),
       HFdigiflagExpectedPeak = cms.int32( 2 )
     ),
-    HFInWindowStat = cms.PSet( 
+    HFInWindowStat = cms.PSet(
       hflongEthresh = cms.double( 40.0 ),
       hflongMinWindowTime = cms.vdouble( -10.0 ),
       hfshortEthresh = cms.double( 40.0 ),
@@ -276,7 +330,7 @@ process.hltHfreco = cms.EDProducer( "HcalHitReconstructor",
       hfshortMaxWindowTime = cms.vdouble( 10.0 ),
       hfshortMinWindowTime = cms.vdouble( -12.0 )
     ),
-    S9S1stat = cms.PSet( 
+    S9S1stat = cms.PSet(
       longETParams = cms.vdouble( 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ),
       shortEnergyParams = cms.vdouble( 35.1773, 35.37, 35.7933, 36.4472, 37.3317, 38.4468, 39.7925, 41.3688, 43.1757, 45.2132, 47.4813, 49.98, 52.7093 ),
       flagsToSkip = cms.int32( 24 ),
@@ -287,7 +341,7 @@ process.hltHfreco = cms.EDProducer( "HcalHitReconstructor",
       isS8S1 = cms.bool( False ),
       HcalAcceptSeverityLevel = cms.int32( 9 )
     ),
-    S8S1stat = cms.PSet( 
+    S8S1stat = cms.PSet(
       longETParams = cms.vdouble( 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ),
       shortEnergyParams = cms.vdouble( 40.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0 ),
       flagsToSkip = cms.int32( 16 ),
@@ -298,7 +352,7 @@ process.hltHfreco = cms.EDProducer( "HcalHitReconstructor",
       isS8S1 = cms.bool( True ),
       HcalAcceptSeverityLevel = cms.int32( 9 )
     ),
-    PETstat = cms.PSet( 
+    PETstat = cms.PSet(
       longETParams = cms.vdouble( 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ),
       short_R_29 = cms.vdouble( 0.8 ),
       shortEnergyParams = cms.vdouble( 35.1773, 35.37, 35.7933, 36.4472, 37.3317, 38.4468, 39.7925, 41.3688, 43.1757, 45.2132, 47.4813, 49.98, 52.7093 ),
@@ -311,25 +365,25 @@ process.hltHfreco = cms.EDProducer( "HcalHitReconstructor",
       HcalAcceptSeverityLevel = cms.int32( 9 )
     ),
     saturationParameters = cms.PSet(  maxADCvalue = cms.int32( 127 ) ),
-    timingshapedcutsParameters = cms.PSet( 
+    timingshapedcutsParameters = cms.PSet(
       ignorelowest = cms.bool( True ),
       win_offset = cms.double( 0.0 ),
       ignorehighest = cms.bool( False ),
       win_gain = cms.double( 1.0 ),
       tfilterEnvelope = cms.vdouble( 4.0, 12.04, 13.0, 10.56, 23.5, 8.82, 37.0, 7.38, 56.0, 6.3, 81.0, 5.64, 114.5, 5.44, 175.5, 5.38, 350.5, 5.14 )
     ),
-    flagParameters = cms.PSet( 
+    flagParameters = cms.PSet(
       nominalPedestal = cms.double( 3.0 ),
       hitMultiplicityThreshold = cms.int32( 17 ),
       hitEnergyMinimum = cms.double( 1.0 ),
-      pulseShapeParameterSets = cms.VPSet( 
+      pulseShapeParameterSets = cms.VPSet(
         cms.PSet(  pulseShapeParameters = cms.vdouble( 0.0, 100.0, -50.0, 0.0, -15.0, 0.15 )        ),
         cms.PSet(  pulseShapeParameters = cms.vdouble( 100.0, 2000.0, -50.0, 0.0, -5.0, 0.05 )        ),
         cms.PSet(  pulseShapeParameters = cms.vdouble( 2000.0, 1000000.0, -50.0, 0.0, 95.0, 0.0 )        ),
         cms.PSet(  pulseShapeParameters = cms.vdouble( -1000000.0, 1000000.0, 45.0, 0.1, 1000000.0, 0.0 )        )
       )
     ),
-    hscpParameters = cms.PSet( 
+    hscpParameters = cms.PSet(
       slopeMax = cms.double( -0.6 ),
       r1Max = cms.double( 1.0 ),
       r1Min = cms.double( 0.15 ),
@@ -343,7 +397,7 @@ process.hltHfreco = cms.EDProducer( "HcalHitReconstructor",
       fracLeaderMax = cms.double( 0.7 )
     ),
     pulseShapeParameters = cms.PSet(  ),
-    hfTimingTrustParameters = cms.PSet( 
+    hfTimingTrustParameters = cms.PSet(
       hfTimingTrustLevel2 = cms.int32( 4 ),
       hfTimingTrustLevel1 = cms.int32( 1 )
     ),
@@ -370,7 +424,7 @@ process.hltHoreco = cms.EDProducer( "HcalHitReconstructor",
     setTimingShapedCutsFlags = cms.bool( False ),
     digistat = cms.PSet(  ),
     HFInWindowStat = cms.PSet(  ),
-    S9S1stat = cms.PSet( 
+    S9S1stat = cms.PSet(
       longETParams = cms.vdouble( 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ),
       HcalAcceptSeverityLevel = cms.int32( 9 ),
       shortEnergyParams = cms.vdouble( 35.1773, 35.37, 35.7933, 36.4472, 37.3317, 38.4468, 39.7925, 41.3688, 43.1757, 45.2132, 47.4813, 49.98, 52.7093 ),
@@ -381,7 +435,7 @@ process.hltHoreco = cms.EDProducer( "HcalHitReconstructor",
       long_optimumSlope = cms.vdouble( -99999.0, 0.0164905, 0.0238698, 0.0321383, 0.041296, 0.0513428, 0.0622789, 0.0741041, 0.0868186, 0.100422, 0.135313, 0.136289, 0.0589927 ),
       isS8S1 = cms.bool( False )
     ),
-    S8S1stat = cms.PSet( 
+    S8S1stat = cms.PSet(
       longETParams = cms.vdouble( 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ),
       HcalAcceptSeverityLevel = cms.int32( 9 ),
       shortEnergyParams = cms.vdouble( 40.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0 ),
@@ -392,7 +446,7 @@ process.hltHoreco = cms.EDProducer( "HcalHitReconstructor",
       long_optimumSlope = cms.vdouble( 0.3, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1 ),
       isS8S1 = cms.bool( True )
     ),
-    PETstat = cms.PSet( 
+    PETstat = cms.PSet(
       longETParams = cms.vdouble( 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ),
       short_R_29 = cms.vdouble( 0.8 ),
       HcalAcceptSeverityLevel = cms.int32( 9 ),
@@ -405,25 +459,25 @@ process.hltHoreco = cms.EDProducer( "HcalHitReconstructor",
       long_R = cms.vdouble( 0.98 )
     ),
     saturationParameters = cms.PSet(  maxADCvalue = cms.int32( 127 ) ),
-    timingshapedcutsParameters = cms.PSet( 
+    timingshapedcutsParameters = cms.PSet(
       ignorelowest = cms.bool( True ),
       win_offset = cms.double( 0.0 ),
       ignorehighest = cms.bool( False ),
       win_gain = cms.double( 1.0 ),
       tfilterEnvelope = cms.vdouble( 4.0, 12.04, 13.0, 10.56, 23.5, 8.82, 37.0, 7.38, 56.0, 6.3, 81.0, 5.64, 114.5, 5.44, 175.5, 5.38, 350.5, 5.14 )
     ),
-    flagParameters = cms.PSet( 
+    flagParameters = cms.PSet(
       nominalPedestal = cms.double( 3.0 ),
       hitMultiplicityThreshold = cms.int32( 17 ),
       hitEnergyMinimum = cms.double( 1.0 ),
-      pulseShapeParameterSets = cms.VPSet( 
+      pulseShapeParameterSets = cms.VPSet(
         cms.PSet(  pulseShapeParameters = cms.vdouble( 0.0, 100.0, -50.0, 0.0, -15.0, 0.15 )        ),
         cms.PSet(  pulseShapeParameters = cms.vdouble( 100.0, 2000.0, -50.0, 0.0, -5.0, 0.05 )        ),
         cms.PSet(  pulseShapeParameters = cms.vdouble( 2000.0, 1000000.0, -50.0, 0.0, 95.0, 0.0 )        ),
         cms.PSet(  pulseShapeParameters = cms.vdouble( -1000000.0, 1000000.0, 45.0, 0.1, 1000000.0, 0.0 )        )
       )
     ),
-    hscpParameters = cms.PSet( 
+    hscpParameters = cms.PSet(
       slopeMax = cms.double( -0.6 ),
       r1Max = cms.double( 1.0 ),
       r1Min = cms.double( 0.15 ),
@@ -437,7 +491,7 @@ process.hltHoreco = cms.EDProducer( "HcalHitReconstructor",
       fracLeaderMax = cms.double( 0.7 )
     ),
     pulseShapeParameters = cms.PSet(  ),
-    hfTimingTrustParameters = cms.PSet( 
+    hfTimingTrustParameters = cms.PSet(
       hfTimingTrustLevel2 = cms.int32( 4 ),
       hfTimingTrustLevel1 = cms.int32( 1 )
     ),
@@ -554,7 +608,7 @@ process.hltCaloJetIDPassed = cms.EDProducer( "HLTJetIDProducer",
     max_EMF = cms.double( 999.0 ),
     min_N90 = cms.int32( -2 ),
     min_N90hits = cms.int32( 2 ),
-    JetIDParams = cms.PSet( 
+    JetIDParams = cms.PSet(
       useRecHits = cms.bool( True ),
       hbheRecHitsColl = cms.InputTag( "hltHbhereco" ),
       hoRecHitsColl = cms.InputTag( "hltHoreco" ),
@@ -636,7 +690,7 @@ if 'hltPreDQMSmart' in process.__dict__:
 if 'hltDQMHLTScalers' in process.__dict__:
     process.hltDQMHLTScalers.triggerResults      = cms.InputTag( 'TriggerResults', '', 'TEST' )
     process.hltDQMHLTScalers.processname         = 'TEST'
-    
+
 if 'hltDQML1SeedLogicScalers' in process.__dict__:
     process.hltDQML1SeedLogicScalers.processname = 'TEST'
 
