@@ -53,7 +53,7 @@ struct AlphaT {
   // -----------------------------------------------------------------------------
   //
   template<class TLorentzVector>
-  double operator()( const std::vector<TLorentzVector *>& p4,
+  double operator()( const std::vector<TLorentzVector const *>& p4,
   bool use_et = true ) const {
 
     if ( p4.size() == 0 ) { return 0; }
@@ -89,6 +89,26 @@ struct AlphaT {
     transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun(&TLorentzVector::Py) );
 
     return value( et, px, py, pseudo_jet1 );
+
+  }
+
+  // -----------------------------------------------------------------------------
+  //
+  template<class TLorentzVector>
+  double operator()( const std::vector<TLorentzVector>& p4,
+  bool use_et = true ) const {
+
+    if ( p4.size() == 0 ) { return 0; }
+
+    std::vector<double> et;
+    std::vector<double> px;
+    std::vector<double> py;
+
+    transform( p4.begin(), p4.end(), back_inserter(et), std::mem_fun_ref( use_et ? &TLorentzVector::Et : &TLorentzVector::Pt ) );
+    transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun_ref(&TLorentzVector::Px) );
+    transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun_ref(&TLorentzVector::Py) );
+
+    return value( et, px, py );
 
   }
 
