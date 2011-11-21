@@ -27,6 +27,7 @@
 #include <vector>
 #include <algorithm>
 #include <functional>
+#include <numeric>
 #include "TLorentzVector.h"
 
 //
@@ -164,15 +165,15 @@ bool
         std::vector<double> py;
 
         double alphaT = 0.;
-        std::transform( jets.begin(), jets.end(), back_inserter(et), std::mem_fun_ref(&TLorentzVector::Et) );
-        std::transform( jets.begin(), jets.end(), back_inserter(px), std::mem_fun_ref(&TLorentzVector::Px) );
-        std::transform( jets.begin(), jets.end(), back_inserter(py), std::mem_fun_ref(&TLorentzVector::Py) );
+        transform( jets.begin(), jets.end(), back_inserter(et), std::mem_fun_ref(&TLorentzVector::Et) );
+        transform( jets.begin(), jets.end(), back_inserter(px), std::mem_fun_ref(&TLorentzVector::Px) );
+        transform( jets.begin(), jets.end(), back_inserter(py), std::mem_fun_ref(&TLorentzVector::Py) );
 
 
 
-        const double sum_et = std::accumulate( et.begin(), et.end(), 0. );
-        const double sum_px = std::accumulate( px.begin(), px.end(), 0. );
-        const double sum_py = std::accumulate( py.begin(), py.end(), 0. );
+        const double sum_et = accumulate( et.begin(), et.end(), 0. );
+        const double sum_px = accumulate( px.begin(), px.end(), 0. );
+        const double sum_py = accumulate( py.begin(), py.end(), 0. );
 
     double min_delta_sum_et = -1.;
     for ( unsigned i=0; i < unsigned(1<<(et.size()-1)); i++ ) { //@@ iterate through different combinations
