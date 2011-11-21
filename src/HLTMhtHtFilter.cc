@@ -25,6 +25,8 @@
 #include "FWCore/ParameterSet/interface/ParameterSetDescription.h"
 #include "FWCore/Utilities/interface/InputTag.h"
 #include <vector>
+#include <algorithm>
+
 #include "TLorentzVector.h"
 
 //
