@@ -141,7 +141,7 @@ bool
         if (jetVar > minPtJet_.at(0) && fabs(recocalojet->eta()) < etaJet_.at(0)) {
           ht += jetVar;
           nj++;
-          JetLVec.SetPxPyPzE(recocalojet->px(),recocalojet->py(),recocalojet->pz(),recocalojet->e())
+          JetLVec.SetPxPyPzE(recocalojet->px(),recocalojet->py(),recocalojet->pz(),recocalojet->E());
           jets.push_back( JetLVec );
         }
       }
