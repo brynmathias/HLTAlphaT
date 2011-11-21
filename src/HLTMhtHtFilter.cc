@@ -124,7 +124,6 @@ bool
     // events with at least one jet
     //make a collection of jets to push back in to alphaT
     std::vector<TLorentzVector> jets;
-    TLorentzVector JetLVec(0.,0.,0.,0.);
     for (CaloJetCollection::const_iterator recocalojet = recocalojets->begin();
     recocalojet != recocalojets->end(); recocalojet++) {
       if (flag == 1){break;}
@@ -141,7 +140,8 @@ bool
         if (jetVar > minPtJet_.at(0) && fabs(recocalojet->eta()) < etaJet_.at(0)) {
           ht += jetVar;
           nj++;
-          JetLVec = recocalojet->detectorP4();
+          TLorentzVector JetLVec(recocalojet->detectorP4(););
+
           jets.push_back( JetLVec );
         }
       }
