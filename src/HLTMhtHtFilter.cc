@@ -30,6 +30,9 @@
 #include <numeric>
 #include "TLorentzVector.h"
 
+
+typedef ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> > LorentzV  ;
+
 //
 // constructors and destructor
 //
@@ -126,7 +129,7 @@ bool
   if(recocalojets->size() > 0){
     // events with at least one jet
     //make a collection of jets to push back in to alphaT
-    std::vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> > jets;
+    std::vector<LorentzV> jets;
     for (CaloJetCollection::const_iterator recocalojet = recocalojets->begin();
     recocalojet != recocalojets->end(); recocalojet++) {
       if (flag == 1){break;}
@@ -143,7 +146,7 @@ bool
         if (jetVar > minPtJet_.at(0) && fabs(recocalojet->eta()) < etaJet_.at(0)) {
           ht += jetVar;
           nj++;
-          ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> JetLVec(0.,0.,0.,0.);
+          LorentzV JetLVec(0.,0.,0.,0.);
           JetLVec.SetPtEtaPhiM(recocalojet->pt(),recocalojet->eta(),recocalojet->phi(),recocalojet->mass());
           jets.push_back( JetLVec );
         }
