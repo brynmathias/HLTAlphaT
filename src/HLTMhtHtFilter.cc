@@ -140,8 +140,8 @@ bool
         if (jetVar > minPtJet_.at(0) && fabs(recocalojet->eta()) < etaJet_.at(0)) {
           ht += jetVar;
           nj++;
-          TLorentzVector* JetLVec();
-          JetLVec->SetPtEtaPhiM(recocalojet->pt(),recocalojet->eta(),recocalojet->phi(),recocalojet->mass());
+          TLorentzVector JetLVec(0.,0.,0.,0.);
+          JetLVec.SetPtEtaPhiM(recocalojet->pt(),recocalojet->eta(),recocalojet->phi(),recocalojet->mass());
           jets.push_back( JetLVec );
         }
       }
@@ -156,7 +156,8 @@ bool
       if(mode_ == 5){
         double mHT = sqrt( (mhtx*mhtx) + (mhty*mhty) );
         dht += ( nj < 2 ? jetVar : -1.* jetVar ); //@@ only use for njets < 4
-        double alpha_t = AlphaT()( jets );
+        std::vector<bool> psudo;
+        double alpha_t = AlphaT()( jets ,psudo);
         if ( nj == 2 || nj == 3 ) {
           aT = ( ht - fabs(dht) ) / ( 2. * sqrt( ( ht*ht ) - ( mHT*mHT  ) ) );
         } else if ( nj > 3 ) {
