@@ -126,7 +126,7 @@ bool
   if(recocalojets->size() > 0){
     // events with at least one jet
     //make a collection of jets to push back in to alphaT
-    std::vector<TLorentzVector> jets;
+    std::vector<ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> > jets;
     for (CaloJetCollection::const_iterator recocalojet = recocalojets->begin();
     recocalojet != recocalojets->end(); recocalojet++) {
       if (flag == 1){break;}
@@ -143,7 +143,7 @@ bool
         if (jetVar > minPtJet_.at(0) && fabs(recocalojet->eta()) < etaJet_.at(0)) {
           ht += jetVar;
           nj++;
-          TLorentzVector JetLVec(0.,0.,0.,0.);
+          ROOT::Math::LorentzVector<ROOT::Math::PxPyPzE4D<double> JetLVec(0.,0.,0.,0.);
           JetLVec.SetPtEtaPhiM(recocalojet->pt(),recocalojet->eta(),recocalojet->phi(),recocalojet->mass());
           jets.push_back( JetLVec );
         }
@@ -165,7 +165,7 @@ bool
         std::vector<double> py;
 
         double alphaT = 0.;
-        // transform( jets.begin(), jets.end(), back_inserter(et), std::mem_fun_ref(&TLorentzVector::Et) );
+        transform( jets.begin(), jets.end(), back_inserter(et), std::mem_fun_ref(&TLorentzVector::Et) );
         transform( jets.begin(), jets.end(), back_inserter(px), std::mem_fun_ref(&TLorentzVector::Px) );
         transform( jets.begin(), jets.end(), back_inserter(py), std::mem_fun_ref(&TLorentzVector::Py) );
 
