@@ -156,8 +156,8 @@ bool
       if(mode_ == 5){
         double mHT = sqrt( (mhtx*mhtx) + (mhty*mhty) );
         dht += ( nj < 2 ? jetVar : -1.* jetVar ); //@@ only use for njets < 4
-        std::vector<bool> psudo;
-        double alpha_t = AlphaT()( jets ,psudo);
+
+        double alpha_t = AlphaT()( jets );
         if ( nj == 2 || nj == 3 ) {
           aT = ( ht - fabs(dht) ) / ( 2. * sqrt( ( ht*ht ) - ( mHT*mHT  ) ) );
         } else if ( nj > 3 ) {

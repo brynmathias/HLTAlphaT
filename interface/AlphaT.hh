@@ -126,7 +126,7 @@ struct AlphaT {
     std::vector<double> px;
     std::vector<double> py;
 
-    transform( p4.begin(), p4.end(), back_inserter(et),  ( use_et ? std::mem_fun(&TLorentzVector::Et) : std::mem_fun(&TLorentzVector::Pt) ) );
+    transform( p4.begin(), p4.end(), back_inserter(et), std::mem_fun_ref( use_et ? &TLorentzVector::Et : &TLorentzVector::Pt ) );
     transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun_ref(&TLorentzVector::Px) );
     transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun_ref(&TLorentzVector::Py) );
 
