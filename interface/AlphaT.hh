@@ -6,6 +6,7 @@
 #include <functional>
 #include <numeric>
 #include <vector>
+#include "TLorentzVector.h"
 //#include "special_less.h"
 
 /**
@@ -104,7 +105,7 @@ struct AlphaT {
     std::vector<double> px;
     std::vector<double> py;
 
-    transform( p4.begin(), p4.end(), back_inserter(et), std::mem_fun( use_et ? &LorentzV::Et : &LorentzV::Pt ) );
+    transform( p4.begin(), p4.end(), back_inserter(et), std::mem_fun(&LorentzV::Et) );
     transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun_ref(&LorentzV::Px) );
     transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun_ref(&LorentzV::Py) );
 
