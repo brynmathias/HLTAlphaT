@@ -140,7 +140,7 @@ bool
         if (jetVar > minPtJet_.at(0) && fabs(recocalojet->eta()) < etaJet_.at(0)) {
           ht += jetVar;
           nj++;
-          TLorentzVector JetLVec(recocalojet->detectorP4(););
+          TLorentzVector JetLVec(recocalojet->detectorP4());
 
           jets.push_back( JetLVec );
         }
