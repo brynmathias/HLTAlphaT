@@ -54,7 +54,7 @@ HLTMhtHtFilter::HLTMhtHtFilter(const edm::ParameterSet& iConfig)
   if (       (minPtJet_.size()    !=  etaJet_.size())
        || (  (minPtJet_.size()<1) || (etaJet_.size()<1) )
        || ( ((minPtJet_.size()<2) || (etaJet_.size()<2))
-	    && ( (mode_==1) || (mode_==2) || (mode_ == 5))) ) {
+      && ( (mode_==1) || (mode_==2) || (mode_ == 5))) ) {
     edm::LogError("HLTMhtHtFilter") << "inconsistent module configuration!";
   }
 
@@ -123,7 +123,8 @@ bool
   if(recocalojets->size() > 0){
     // events with at least one jet
     //make a collection of jets to push back in to alphaT
-    std::vector<CaloJetCollection> jets;
+    std::vector<TLorentzVector> jets;
+    TLorentzVector JetLVec(0.,0.,0.,0.);
     for (CaloJetCollection::const_iterator recocalojet = recocalojets->begin();
     recocalojet != recocalojets->end(); recocalojet++) {
       if (flag == 1){break;}
@@ -140,7 +141,8 @@ bool
         if (jetVar > minPtJet_.at(0) && fabs(recocalojet->eta()) < etaJet_.at(0)) {
           ht += jetVar;
           nj++;
-          jets.push_back( *recocalojet );
+          JetLVec.SetPxPyPzE(recocalojet->px(),recocalojet->py(),recocalojet->pz(),recocalojet->e())
+          jets.push_back( JetLVec );
         }
       }
       if (mode_==3) {//---get PT12
