@@ -6,7 +6,7 @@
 */
 
 #include "HLTrigger/JetMET/interface/HLTMhtHtFilter.h"
-#include "HLTrigger/JetMET/interface/AlphaT.hh"
+// #include "HLTrigger/JetMET/interface/AlphaT.hh"
 
 #include "DataFormats/Common/interface/Handle.h"
 
@@ -157,13 +157,44 @@ bool
         double mHT = sqrt( (mhtx*mhtx) + (mhty*mhty) );
         dht += ( nj < 2 ? jetVar : -1.* jetVar ); //@@ only use for njets < 4
 
-        double alpha_t = AlphaT()( jets );
+        std::vector<double> et;
+        std::vector<double> px;
+        std::vector<double> py;
+
+        transform( jets.begin(), jets.end(), back_inserter(et), std::mem_fun_ref( use_et ? &TLorentzVector::Et : &TLorentzVector::Pt ) );
+        transform( jets.begin(), jets.end(), back_inserter(px), std::mem_fun_ref(&TLorentzVector::Px) );
+        transform( jets.begin(), jets.end(), back_inserter(py), std::mem_fun_ref(&TLorentzVector::Py) );
+
+
+
+        const double sum_et = accumulate( et.begin(), et.end(), 0. );
+        const double sum_px = accumulate( px.begin(), px.end(), 0. );
+        const double sum_py = accumulate( py.begin(), py.end(), 0. );
+
+    double min_delta_sum_et = -1.;
+    for ( unsigned i=0; i < unsigned(1<<(et.size()-1)); i++ ) { //@@ iterate through different combinations
+      double delta_sum_et = 0.;
+      std::vector<bool> jet;
+      for ( unsigned j=0; j < et.size(); j++ ) { //@@ iterate through jets
+        delta_sum_et += et[j] * ( 1 - 2 * (int(i>>j)&1) );
+
+      }
+      if ( ( fabs(delta_sum_et) < min_delta_sum_et || min_delta_sum_et < 0. ) ) {
+        min_delta_sum_et = fabs(delta_sum_et);
+      }
+    }
+    if ( min_delta_sum_et < 0. ) { alphaT =  0.; }
+
+    // Alpha_T
+    double  alphaT =  ( 0.5 * ( sum_et - min_delta_sum_et ) / sqrt( sum_et*sum_et - (sum_px*sum_px+sum_py*sum_py) ) );
+
+
         if ( nj == 2 || nj == 3 ) {
           aT = ( ht - fabs(dht) ) / ( 2. * sqrt( ( ht*ht ) - ( mHT*mHT  ) ) );
         } else if ( nj > 3 ) {
           aT = ht / ( 2.*sqrt( ( ht*ht ) - ( mHT*mHT  ) ) );
         }
-        std::cout << "AlphaT from full calculation = " << alpha_t << " ALphaT from approximation = " << aT << std::endl;
+        std::cout << "AlphaT from full calculation = " << alphaT << " ALphaT from approximation = " << aT << std::endl;
         if(ht > minHt_ && aT > minAlphaT_){
   // put filter object into the Event
           flag = 1;
