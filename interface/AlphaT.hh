@@ -6,7 +6,7 @@
 #include <functional>
 #include <numeric>
 #include <vector>
-#include "TLorentzVector.h"
+#include "TTLorentzVectorector.h"
 //#include "special_less.h"
 
 /**
@@ -53,8 +53,8 @@ struct AlphaT {
 
   // -----------------------------------------------------------------------------
   //
-  template<class LorentzV>
-  double operator()( const std::vector<LorentzV const *>& p4,
+  template<class TLorentzVector>
+  double operator()( const std::vector<TLorentzVector const *>& p4,
          bool use_et = true ) const {
 
     if ( p4.size() == 0 ) { return 0; }
@@ -63,9 +63,9 @@ struct AlphaT {
     std::vector<double> px;
     std::vector<double> py;
 
-    transform( p4.begin(), p4.end(), back_inserter(et), ( use_et ? std::mem_fun(&LorentzV::Et) : std::mem_fun(&LorentzV::Pt) ) );
-    transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun(&LorentzV::Px) );
-    transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun(&LorentzV::Py) );
+    transform( p4.begin(), p4.end(), back_inserter(et), ( use_et ? std::mem_fun(&TLorentzVector::Et) : std::mem_fun(&TLorentzVector::Pt) ) );
+    transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun(&TLorentzVector::Px) );
+    transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun(&TLorentzVector::Py) );
 
     return value( et, px, py );
 
@@ -73,8 +73,8 @@ struct AlphaT {
 
   // -----------------------------------------------------------------------------
   //
-  template<class LorentzV>
-  double operator()( const std::vector<LorentzV const *>& p4,
+  template<class TLorentzVector>
+  double operator()( const std::vector<TLorentzVector const *>& p4,
          std::vector<bool>& pseudo_jet1,
          bool use_et = true ) const {
 
@@ -85,9 +85,9 @@ struct AlphaT {
     std::vector<double> py;
     pseudo_jet1.clear();
 
-    transform( p4.begin(), p4.end(), back_inserter(et), std::mem_fun( use_et ? &LorentzV::Et : &LorentzV::Pt ) );
-    transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun(&LorentzV::Px) );
-    transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun(&LorentzV::Py) );
+    transform( p4.begin(), p4.end(), back_inserter(et), std::mem_fun( use_et ? &TLorentzVector::Et : &TLorentzVector::Pt ) );
+    transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun(&TLorentzVector::Px) );
+    transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun(&TLorentzVector::Py) );
 
     return value( et, px, py, pseudo_jet1 );
 
@@ -95,8 +95,8 @@ struct AlphaT {
 
   // -----------------------------------------------------------------------------
   //
-  template<class LorentzV>
-  double operator()( const std::vector<LorentzV>& p4,
+  template<class TLorentzVector>
+  double operator()( const std::vector<TLorentzVector>& p4,
          bool use_et = true ) const {
 
     if ( p4.size() == 0 ) { return 0; }
@@ -105,9 +105,9 @@ struct AlphaT {
     std::vector<double> px;
     std::vector<double> py;
 
-    transform( p4.begin(), p4.end(), back_inserter(et), std::mem_fun_ref(&LorentzV::Et) );
-    transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun_ref(&LorentzV::Px) );
-    transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun_ref(&LorentzV::Py) );
+    transform( p4.begin(), p4.end(), back_inserter(et), std::mem_fun_ref(&TLorentzVector::Et) );
+    transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun_ref(&TLorentzVector::Px) );
+    transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun_ref(&TLorentzVector::Py) );
 
     return value( et, px, py );
 
@@ -116,8 +116,8 @@ struct AlphaT {
 
   // -----------------------------------------------------------------------------
   //
-  template<class LorentzV>
-  double operator()( const std::vector<LorentzV>& p4,
+  template<class TLorentzVector>
+  double operator()( const std::vector<TLorentzVector>& p4,
          std::vector<bool>& pseudo_jet1,
          bool use_et = true ) const {
 
@@ -127,9 +127,9 @@ struct AlphaT {
     std::vector<double> px;
     std::vector<double> py;
 
-    transform( p4.begin(), p4.end(), back_inserter(et), std::mem_fun_ref( use_et ? &LorentzV::Et : &LorentzV::Pt ) );
-    transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun_ref(&LorentzV::Px) );
-    transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun_ref(&LorentzV::Py) );
+    transform( p4.begin(), p4.end(), back_inserter(et), std::mem_fun_ref( use_et ? &TLorentzVector::Et : &TLorentzVector::Pt ) );
+    transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun_ref(&TLorentzVector::Px) );
+    transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun_ref(&TLorentzVector::Py) );
 
     return value( et, px, py, pseudo_jet1 );
 
