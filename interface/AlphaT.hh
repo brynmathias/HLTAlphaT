@@ -6,42 +6,41 @@
 #include <functional>
 #include <numeric>
 #include <vector>
-#include "TLorentzVector.h"
 //#include "special_less.h"
 
 /**
-Usage:
+   Usage:
 
-Functor takes as its first argument:
-std::vector<const LV*>
-or
-std::vector<LV>
-where LV is any class that has the the methods LV::Et() and LV::Pt().
+   Functor takes as its first argument:
+   std::vector<const LV*>
+   or
+   std::vector<LV>
+   where LV is any class that has the the methods LV::Et() and LV::Pt().
 
-eg:
-double alpha_t = AlphaT()( ev.CommonObjects() );
+   eg:
+   double alpha_t = AlphaT()( ev.CommonObjects() );
 
-Optionally, a bool can be passed as an argument which determines
-whether jet Et (default=true) or Pt (false) values are used in the
-calculation.
+   Optionally, a bool can be passed as an argument which determines
+   whether jet Et (default=true) or Pt (false) values are used in the
+   calculation.
 
-eg (to use Et):
-double alpha_t = AlphaT()( ev.CommonObjects(), true );
-or (equivalently):
-double alpha_t = AlphaT()( ev.CommonObjects() );
+   eg (to use Et):
+   double alpha_t = AlphaT()( ev.CommonObjects(), true );
+   or (equivalently):
+   double alpha_t = AlphaT()( ev.CommonObjects() );
 
-eg (to use Pt):
-double alpha_t = AlphaT()( ev.CommonObjects(), false );
+   eg (to use Pt):
+   double alpha_t = AlphaT()( ev.CommonObjects(), false );
 
-Also, the second argument can be a std::vector<bool> (passed by
-reference), which indicates whether the jet of the corresponding
-index was assigned to the peusdo-jet #1 (ie, true) or #2 (false).
+   Also, the second argument can be a std::vector<bool> (passed by
+   reference), which indicates whether the jet of the corresponding
+   index was assigned to the peusdo-jet #1 (ie, true) or #2 (false).
 
-eg (third argument, Et or Pt, is optional and defaults to true):
-std::vector<bool> jet1;
-double alpha_t = AlphaT()( ev.CommonObjects(), jet1, false );
+   eg (third argument, Et or Pt, is optional and defaults to true):
+   std::vector<bool> jet1;
+   double alpha_t = AlphaT()( ev.CommonObjects(), jet1, false );
 
-*/
+ */
 
 struct AlphaT {
 
@@ -53,8 +52,9 @@ struct AlphaT {
 
   // -----------------------------------------------------------------------------
   //
-  double operator()( const std::vector<TLorentzVector const *>& p4,
-  bool use_et = true ) const {
+  template<class LorentzV>
+  double operator()( const std::vector<LorentzV const *>& p4,
+         bool use_et = true ) const {
 
     if ( p4.size() == 0 ) { return 0; }
 
@@ -62,9 +62,9 @@ struct AlphaT {
     std::vector<double> px;
     std::vector<double> py;
 
-    transform( p4.begin(), p4.end(), back_inserter(et), std::mem_fun_ref(&TLorentzVector::Et) );
-    transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun(&TLorentzVector::Px) );
-    transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun(&TLorentzVector::Py) );
+    transform( p4.begin(), p4.end(), back_inserter(et), ( use_et ? std::mem_fun(&LorentzV::Et) : std::mem_fun(&LorentzV::Pt) ) );
+    transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun(&LorentzV::Px) );
+    transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun(&LorentzV::Py) );
 
     return value( et, px, py );
 
@@ -72,9 +72,10 @@ struct AlphaT {
 
   // -----------------------------------------------------------------------------
   //
-  double operator()( const std::vector<TLorentzVector const *>& p4,
-    std::vector<bool>& pseudo_jet1,
-  bool use_et = true ) const {
+  template<class LorentzV>
+  double operator()( const std::vector<LorentzV const *>& p4,
+         std::vector<bool>& pseudo_jet1,
+         bool use_et = true ) const {
 
     if ( p4.size() == 0 ) { return 0; }
 
@@ -83,9 +84,9 @@ struct AlphaT {
     std::vector<double> py;
     pseudo_jet1.clear();
 
-    transform( p4.begin(), p4.end(), back_inserter(et), std::mem_fun(&TLorentzVector::Et) );
-    transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun(&TLorentzVector::Px) );
-    transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun(&TLorentzVector::Py) );
+    transform( p4.begin(), p4.end(), back_inserter(et), std::mem_fun( use_et ? &LorentzV::Et : &LorentzV::Pt ) );
+    transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun(&LorentzV::Px) );
+    transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun(&LorentzV::Py) );
 
     return value( et, px, py, pseudo_jet1 );
 
@@ -93,8 +94,9 @@ struct AlphaT {
 
   // -----------------------------------------------------------------------------
   //
-  double operator()( const std::vector<TLorentzVector>& p4,
-  bool use_et = true ) const {
+  template<class LorentzV>
+  double operator()( const std::vector<LorentzV>& p4,
+         bool use_et = true ) const {
 
     if ( p4.size() == 0 ) { return 0; }
 
@@ -102,9 +104,9 @@ struct AlphaT {
     std::vector<double> px;
     std::vector<double> py;
 
-    transform( p4.begin(), p4.end(), back_inserter(et), std::mem_fun(&TLorentzVector::Et) );
-    transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun(&TLorentzVector::Px) );
-    transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun(&TLorentzVector::Py) );
+    transform( p4.begin(), p4.end(), back_inserter(et), std::mem_fun( use_et ? &LorentzV::Et : &LorentzV::Pt ) );
+    transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun_ref(&LorentzV::Px) );
+    transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun_ref(&LorentzV::Py) );
 
     return value( et, px, py );
 
@@ -113,9 +115,10 @@ struct AlphaT {
 
   // -----------------------------------------------------------------------------
   //
-  double operator()( const std::vector<TLorentzVector>& p4,
-    std::vector<bool>& pseudo_jet1,
-  bool use_et = true ) const {
+  template<class LorentzV>
+  double operator()( const std::vector<LorentzV>& p4,
+         std::vector<bool>& pseudo_jet1,
+         bool use_et = true ) const {
 
     if ( p4.size() == 0 ) { return 0; }
 
@@ -123,9 +126,9 @@ struct AlphaT {
     std::vector<double> px;
     std::vector<double> py;
 
-    transform( p4.begin(), p4.end(), back_inserter(et), std::mem_fun(&TLorentzVector::Et) );
-    transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun(&TLorentzVector::Px) );
-    transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun(&TLorentzVector::Py) );
+    transform( p4.begin(), p4.end(), back_inserter(et), std::mem_fun_ref( use_et ? &LorentzV::Et : &LorentzV::Pt ) );
+    transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun_ref(&LorentzV::Px) );
+    transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun_ref(&LorentzV::Py) );
 
     return value( et, px, py, pseudo_jet1 );
 
@@ -134,10 +137,10 @@ struct AlphaT {
   // -----------------------------------------------------------------------------
   //
   static double value( const std::vector<double>& et,
-    const std::vector<double>& px,
-    const std::vector<double>& py,
-    std::vector<bool>& pseudo_jet1,
-  bool list = true ) {
+           const std::vector<double>& px,
+           const std::vector<double>& py,
+           std::vector<bool>& pseudo_jet1,
+           bool list = true ) {
 
     // Clear pseudo-jet container
     pseudo_jet1.clear();
@@ -153,15 +156,15 @@ struct AlphaT {
       double delta_sum_et = 0.;
       std::vector<bool> jet;
       for ( unsigned j=0; j < et.size(); j++ ) { //@@ iterate through jets
-        delta_sum_et += et[j] * ( 1 - 2 * (int(i>>j)&1) );
-        if ( list ) { jet.push_back( (int(i>>j)&1) == 0 ); }
+  delta_sum_et += et[j] * ( 1 - 2 * (int(i>>j)&1) );
+  if ( list ) { jet.push_back( (int(i>>j)&1) == 0 ); }
       }
       if ( ( fabs(delta_sum_et) < min_delta_sum_et || min_delta_sum_et < 0. ) ) {
-        min_delta_sum_et = fabs(delta_sum_et);
-        if ( list && jet.size() == et.size() ) {
-          pseudo_jet1.resize(jet.size());
-          std::copy( jet.begin(), jet.end(), pseudo_jet1.begin() );
-        }
+  min_delta_sum_et = fabs(delta_sum_et);
+  if ( list && jet.size() == et.size() ) {
+    pseudo_jet1.resize(jet.size());
+    std::copy( jet.begin(), jet.end(), pseudo_jet1.begin() );
+  }
       }
     }
     if ( min_delta_sum_et < 0. ) { return 0.; }
@@ -174,8 +177,8 @@ struct AlphaT {
   // -----------------------------------------------------------------------------
   //
   static double value( const std::vector<double>& et,
-    const std::vector<double>& px,
-  const std::vector<double>& py ) {
+           const std::vector<double>& px,
+           const std::vector<double>& py ) {
     std::vector<bool> pseudo_jet1;
     return value( et, px, py, pseudo_jet1, false );
   }
