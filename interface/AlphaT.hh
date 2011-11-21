@@ -70,7 +70,49 @@ struct AlphaT {
 
   }
 
+  // -----------------------------------------------------------------------------
+  //
+  template<class TLorentzVector>
+  double operator()( const std::vector<TLorentzVector const *>& p4,
+    std::vector<bool>& pseudo_jet1,
+  bool use_et = true ) const {
 
+    if ( p4.size() == 0 ) { return 0; }
+
+    std::vector<double> et;
+    std::vector<double> px;
+    std::vector<double> py;
+    pseudo_jet1.clear();
+
+    transform( p4.begin(), p4.end(), back_inserter(et), std::mem_fun( use_et ? &TLorentzVector::Et : &TLorentzVector::Pt ) );
+    transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun(&TLorentzVector::Px) );
+    transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun(&TLorentzVector::Py) );
+
+    return value( et, px, py, pseudo_jet1 );
+
+  }
+
+
+  // -----------------------------------------------------------------------------
+  //
+  template<class TLorentzVector>
+  double operator()( const std::vector<TLorentzVector>& p4,
+    std::vector<bool>& pseudo_jet1,
+  bool use_et = true ) const {
+
+    if ( p4.size() == 0 ) { return 0; }
+
+    std::vector<double> et;
+    std::vector<double> px;
+    std::vector<double> py;
+
+    transform( p4.begin(), p4.end(), back_inserter(et), std::mem_fun_ref( use_et ? &TLorentzVector::Et : &TLorentzVector::Pt ) );
+    transform( p4.begin(), p4.end(), back_inserter(px), std::mem_fun_ref(&TLorentzVector::Px) );
+    transform( p4.begin(), p4.end(), back_inserter(py), std::mem_fun_ref(&TLorentzVector::Py) );
+
+    return value( et, px, py, pseudo_jet1 );
+
+  }
 
   // -----------------------------------------------------------------------------
   //
@@ -110,6 +152,15 @@ struct AlphaT {
     // Alpha_T
     return ( 0.5 * ( sum_et - min_delta_sum_et ) / sqrt( sum_et*sum_et - (sum_px*sum_px+sum_py*sum_py) ) );
 
+  }
+
+  // -----------------------------------------------------------------------------
+  //
+  static double value( const std::vector<double>& et,
+    const std::vector<double>& px,
+  const std::vector<double>& py ) {
+    std::vector<bool> pseudo_jet1;
+    return value( et, px, py, pseudo_jet1, false );
   }
 
 };
